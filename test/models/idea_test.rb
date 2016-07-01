@@ -29,7 +29,7 @@ class IdeaTest < ActiveSupport::TestCase
 
     refute(ideas(:one).valid?)
   end
-  
+
   test "it should be invalid without a title or body" do
     idea_without_title_or_body = Idea.new
 

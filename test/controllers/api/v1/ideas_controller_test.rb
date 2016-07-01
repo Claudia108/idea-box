@@ -102,4 +102,10 @@ class Api::V1::IdeasControllerTest < ActionController::TestCase
     ideas(:one).reload
     assert_response 422
   end
+
+  test "#destroy removes an idea" do
+    assert_difference 'Idea.count', -1 do
+      delete :destroy, id: ideas(:one).id, format: :json
+    end
+  end  
 end
