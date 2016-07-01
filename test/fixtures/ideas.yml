@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: First Idea
+  body: Create world peace
+  quality: genius
+
+two:
+  title: Second Idea
+  body: Eat more ice cream
+  quality: swill
