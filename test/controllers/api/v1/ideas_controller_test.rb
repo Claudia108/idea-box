@@ -76,6 +76,30 @@ class Api::V1::IdeasControllerTest < ActionController::TestCase
     post :create, idea: idea, format: :json
 
     assert_response 422
-    assert_includes json_response["errors"]["body"], "can't be blank"    
+    assert_includes json_response["errors"]["body"], "can't be blank"
+  end
+
+  test "#update an idea through the API" do
+    updated_content = { title: "Updated Title"}
+
+    put :update, id: ideas(:one).id, idea: updated_content, format: :json
+    ideas(:one).reload
+    assert_equal "Updated Title", ideas(:one).title
+  end
+
+  test "#update the quality of an idea through the API" do
+    updated_content = { quality: "plausible"}
+
+    put :update, id: ideas(:one).id, idea: updated_content, format: :json
+    ideas(:one).reload
+    assert_equal "plausible", ideas(:one).quality
+  end
+
+  test "#update rejects invalid quality updates" do
+    updated_content = { quality: "invalid"}
+
+    put :update, id: ideas(:one).id, idea: updated_content, format: :json
+    ideas(:one).reload
+    assert_response 422
   end
 end

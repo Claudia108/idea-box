@@ -18,9 +18,18 @@ class Api::V1::IdeasController < ApplicationController
     end
   end
 
+  def update
+    idea = Idea.find(params[:id])
+    if idea.update(idea_params)
+      respond_with(idea, status: 200, location: api_v1_idea_path(idea))
+    else
+      render json: idea.errors, status: 422
+    end
+  end
+
   private
 
   def idea_params
-    params.require(:idea).permit(:title, :body)
+    params.require(:idea).permit(:title, :body, :quality)
   end
 end
